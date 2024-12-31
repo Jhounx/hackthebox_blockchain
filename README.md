@@ -3,19 +3,8 @@
 ### Deploy
 
 ```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
+$ forge script script/ChallengeSolution.s.sol --rpc-url <challenge_rpc_url> --broadcast
 ```
 
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+### :)
+Maybe in the future I'll make a good walkthrough for each challenge, but for now that's it :)
